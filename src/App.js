@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { CreateCategory } from './components/CreateCategory';
+import { ShowCategory } from './components/ShowCategory';
+
+
 
 function App() {
+  
+  const [categories, setCategories] = useState([]);
+
+  function addCategory (category) {
+    setCategories((prevCategories) => [category, ...prevCategories])
+  }
+  
+  
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1> GiphyApp</h1>
+      <CreateCategory addCategory={addCategory} />
+      {categories.map((category)=> {
+        return <ShowCategory key={category} category={category}/>
+      })}
     </div>
-  );
+  )
 }
 
 export default App;
